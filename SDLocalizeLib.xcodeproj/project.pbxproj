@@ -6,8 +6,15 @@
 	objectVersion = 55;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		18D3D8E429064A1E002BD885 /* SDLocalize.h in Headers */ = {isa = PBXBuildFile; fileRef = 18D3D8E229064A1E002BD885 /* SDLocalize.h */; };
+		18D3D8E529064A1E002BD885 /* SDLocalize.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D3D8E329064A1E002BD885 /* SDLocalize.m */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		18D3D8DA29064A04002BD885 /* libSDLocalizeLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSDLocalizeLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		18D3D8E229064A1E002BD885 /* SDLocalize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLocalize.h; sourceTree = "<group>"; };
+		18D3D8E329064A1E002BD885 /* SDLocalize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLocalize.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,6 +31,7 @@
 		18D3D8D129064A04002BD885 = {
 			isa = PBXGroup;
 			children = (
+				18D3D8E129064A1E002BD885 /* SDLocalize */,
 				18D3D8DB29064A04002BD885 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -36,6 +44,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		18D3D8E129064A1E002BD885 /* SDLocalize */ = {
+			isa = PBXGroup;
+			children = (
+				18D3D8E229064A1E002BD885 /* SDLocalize.h */,
+				18D3D8E329064A1E002BD885 /* SDLocalize.m */,
+			);
+			path = SDLocalize;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -43,6 +60,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D3D8E429064A1E002BD885 /* SDLocalize.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18D3D8E529064A1E002BD885 /* SDLocalize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +162,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DRIVERKIT_DEPLOYMENT_TARGET = 21.4;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -163,7 +182,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = driverkit;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -201,7 +220,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DRIVERKIT_DEPLOYMENT_TARGET = 21.4;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -214,7 +233,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = driverkit;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
