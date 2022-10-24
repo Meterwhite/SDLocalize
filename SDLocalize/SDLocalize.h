@@ -1,5 +1,5 @@
 //
-//  UIView+SDLocalize.h
+//  SDLocalize.h
 //  Meterwhite
 //
 //  Created by Meterwhite on 2022/9/1.
