@@ -30,7 +30,8 @@ pod 'SDLocalize'
 > 3. SDLocalize replaces the text of the current control with the text of the control as LocalizedString.key
 
 ## 在XIB上使用(Use on the XIB)
-- 设置pageName至sdl_register
+- 设置pageName至sdl_register(Set pageName to sdl_register)
+![sdl_register](https://raw.githubusercontent.com/Meterwhite/SDLocalize/main/ex1.png)
 ```objc
 // It then triggers a set of localization tasks when needed
 - (void)viewDidLoad {
@@ -45,7 +46,7 @@ control2.text = <LocalizedString.key>;
 ...
 [control0 sdl_defaultRegister];
 [control1 sdl_defaultRegister];
-[control2 sdl_defaultRegister];
+control2.sdl_defaultRegister = @"-";
 ...
 // 然后在恰当时机(viewDidLoad),触发一组本地化任务
 // It then triggers a set of localization tasks when needed
