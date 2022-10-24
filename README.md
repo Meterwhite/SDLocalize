@@ -4,9 +4,8 @@
 * Efficient iOS localization solution.(Objc, swift, NSLocalizedString, xib)
 * 高效的iOS本地化解决方案
 * 点赞富一生.
-* Good luck for one start .
 
-## Import
+## 导入(Import)
 - Drag floder `SDLocalize` to your project.
 ```objc
 #import "SDLocalize.h"
@@ -16,103 +15,89 @@
 pod 'SDLocalize'
 ```
 
-## 工作原理
-1. 首先标记一组需要本地化的控件
-2. 然后在恰当时机(viewDidLoad),触发一组本地化任务
-3. 
-```objc
+## 对象列表(The object list)
+- SDLocalize
+- NSObject + SDLocalize
+- NSString + SDLocalize
+- NSArray + SDLocalize
 
-```
-## 分步处理复杂的业务 Step-by-step processing of complex business.
+## SDLocalize工作原理(How SDLocalize works)
+1. 首先标记一组需要本地化的控件
+2. 然后在恰当时机(viewDidLoad),触发一组本地化任务(Then (viewDidLoad) fires a set of localization tasks when needed)
+3. SDLocalize会使用控件的文本作为LocalizedString.key替换当前控件的文本
+> 1. Start by marking a set of controls that need to be localized
+> 2. Then (viewDidLoad) fires a set of localization tasks when needed
+> 3. SDLocalize replaces the text of the current control with the text of the control as LocalizedString.key
+
+## 在XIB上使用(Use on the XIB)
+- 设置pageName至sdl_register
 ```objc
-SDMask<UserView*>* mask = SDAlertMaskWith(currentController, userView);
-[mask userViewDidLoad:^(SDMaskModel<UserView*> * model) {
-    model.
-    setAutolayoutValueForKey(@(0),   @"bottom").
-    setAutolayoutValueForKey(@(15),  @"left").
-    setAutolayoutValueForKey(@(15),  @"right").
-    setAutolayoutValueForKey(@(350), @"height");
-}];
-[mask bindEventForControls:@[Button1, Button2, [Button3 sdm_withBindingKey:@"MyKey"], ...]];
-[mask bindEventForCancelControl:CancelButton];
-[mask bindingEventFor:Button1 usingBlock:^(SDMaskBindingEvent<UserView*> * event) {
-    /// ...
-}];
-[mask bindingEventFor:@"MyKey" usingBlock:^(SDMaskBindingEvent<UserView*> * event) {
-    /// ...
-}];
-[mask show];
+// It then triggers a set of localization tasks when needed
+- (void)viewDidLoad {
+    [SDLocalize defaultLocalize];
+}
 ```
-## 引导控制器 SDMaskGuidController
-### 在一个XIB文件中设置多个页面的约束进行适配，可以适应90%的设计需求。Set multiple guid pages in one controller XIB file ! By changing the constraints in XIB to adapt the device, this solution can address 90% of the design needs.
+## 使用代码创建控件并完成本地化(Use code to create and localize the control)
 ```objc
-[[[MySDMaskGuidController new] userViewDidLoad:^(SDMaskModel * _Nonnull model) {
-    /// Set the same color as user view to background.
-    [model setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.6]];
-}] show];
+control0.text = <LocalizedString.key>;
+control1.text = <LocalizedString.key>;
+control2.text = <LocalizedString.key>;
+...
+[control0 sdl_defaultRegister];
+[control1 sdl_defaultRegister];
+[control2 sdl_defaultRegister];
+...
+// 然后在恰当时机(viewDidLoad),触发一组本地化任务
+// It then triggers a set of localization tasks when needed
+- (void)viewDidLoad {
+    [SDLocalize defaultLocalize]; // Takes effect on all controls marked as default pages
+    //[control0 sdl_localizeIfNeed];
+    //[control1 sdl_localizeIfNeed];
+    //[control2 sdl_localizeIfNeed];
+    // ...
+}
 ```
-## 链式编程 Chain programming
--  链式编程涵盖了大多数方法 Chained programming covers most methods
+## 默认支持的控件(Supported controls)
+- `< UILabe, UIButtonl, UITextView >.text`
+- `< UITextField >.placeholder`
+## 支持的自定义控件(Supported custom controls)
 ```objc
-[...[[[mask bindEventForControls:@[okButton]] bindEventForCancelControl:cancelButton] bindingEventsUsingBlock:^(SDMaskBindingEvent<UserView*>* event) {
-    
-}]... show];
-```
-## Use autolayout
-### 自动布局的两种方式 Tow ways to use autolayout.
-- a. 框架提供 Use the methods provided by the SDMask to use autolayout. 
-```objc
-[mask userViewDidLoad:^(SDMaskModel<UserView*> * model) {
-    model.
-    setAutolayoutValueForKey(@(0), @"bottom").
-    setAutolayoutValueForKey(@(15), @"left").
-    setAutolayoutValueForKey(@(15), @"right").
-    setAutolayoutValueForKey(@(350), @"height");
-}];
-```
-- b. 三方或手动布局 Autolayout by youself. Like 'masonry'
-```objc
-[mask userViewDidLoad:^(SDMaskModel<UserView*> * model) {
-    [model.userView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(model.containerView);
-        make.left.equalTo(model.containerView.mas_left).offset(20);
-        make.right.equalTo(model.containerView.mas_right).offset(-20);
-    }];
+[SDLocalize customTextGetter:^(id object){
+    if(object is MyView) {
+        return myView.myText;
+    }
+} andSetter:^(NSString *localizedText, id object){
+    if(object is MyView) {
+        myView.myText = localizedText;
+    }
 }];
 ```
-## 自定义动画 Use custom animations
-- Framelayout
+
+## 动态格式文本(Dynamic format text)
 ```objc
-[[[[[mask userViewPresentationWillAnimate:^(SDMaskModel<UserView*> * model) {
-    userView.frame = frameA;
-}] userViewPresentationDoAnimations:^(SDMaskModel<UserView*> * model) {
-    userView.frame = frameB;
-}] userViewDismissionWillAnimate:^(SDMaskModel<UserView*> * model) {
-    /// ...
-}] userViewDismissionDoAnimations:^(SDMaskModel<UserView*> * model) {
-    userView.frame = frameA;
-}] disableSystemAnimation];
+control.sdl_dynamicFormat = @"My name is %@, %@ years old."; // XIB supported
+...
+[control sdl_localizeWithFormateArgs:@[name, age]];
 ```
-- Autolayout
+
+## 手动本地化(Perform localization manually)
 ```objc
-[[[[[mask userViewPresentationWillAnimate:^(SDMaskModel<UserView*> * model) {
-    userView.bottonConstraint = A;
-    //[self.view setNeedsLayout];
-    //[self.view layoutIfNeeded];
-}] userViewPresentationDoAnimations:^(SDMaskModel<UserView*> * model) {
-    userView.bottonConstraint = B;
-    [self.view setNeedsLayout];
-    [self.view layoutIfNeeded];
-}] userViewDismissionWillAnimate:^(SDMaskModel<UserView*> * model) {
-    /// ...
-}] userViewDismissionDoAnimations:^(SDMaskModel<UserView*> * model) {
-    userView.bottonConstraint = A;
-    [self.view setNeedsLayout];
-    [self.view layoutIfNeeded];
-}] disableSystemAnimation];
+[control sdl_localizeIfNeed];
 ```
-## 使用泛型 Use generics
-* 泛型宏定义的使用可以避免在外部声明弱引用 The use of macro definitions for generic functions can avoid declaring weak references externally  
+
+## 扩展(Category)
+```objc
+string.sdl_localizedString;
+@[string0, string1, string2, ...].sdl_localizedArray;
+```
+
+## 回调(Callback)
+```objc
+control.sdl_localizedDone
+```
+
+## 更多(More)
+- 阅读源代码(Read the source code)
 
 ## Email
 - app合作：meterwhite@outlook.com
