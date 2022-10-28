@@ -109,8 +109,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (getter = sdl_isDynamicFormat) BOOL sdl_dynamicFormat;
 
+/// @param args A maximum of 20 parameters are supported
 - (void)sdl_localizeWithFormateArgs:(NSArray *)args;
 
+/// A maximum of 20 parameters are supported
 @property (nullable, nonatomic, copy) NSArray *sdl_formatArgs;
 
 @end

@@ -36,12 +36,28 @@ NSString *getLocalizedText(NSString *text, NSString *scheme)  {
 }
 
 NSString *stringFormatWithArray(NSString *format, NSArray *arguments) {
-    size_t size = sizeof(NSString *) * arguments.count;
-    char *argList = malloc(size);
-    [arguments getObjects:(__unsafe_unretained id *)(void *)argList range:(NSMakeRange(0, arguments.count))];
-    NSString* result = [[NSString alloc] initWithFormat:format arguments:(void *)argList];
-    free(argList);
-    return result;
+    return [NSString stringWithFormat:format,
+            (arguments.count > 0) ? [arguments objectAtIndex:0] : nil,
+            (arguments.count > 1) ? [arguments objectAtIndex:1] : nil,
+            (arguments.count > 2) ? [arguments objectAtIndex:2] : nil,
+            (arguments.count > 3) ? [arguments objectAtIndex:3] : nil,
+            (arguments.count > 4) ? [arguments objectAtIndex:4] : nil,
+            (arguments.count > 5) ? [arguments objectAtIndex:5] : nil,
+            (arguments.count > 6) ? [arguments objectAtIndex:6] : nil,
+            (arguments.count > 7) ? [arguments objectAtIndex:7] : nil,
+            (arguments.count > 8) ? [arguments objectAtIndex:8] : nil,
+            (arguments.count > 9) ? [arguments objectAtIndex:9] : nil,
+            (arguments.count > 10) ? [arguments objectAtIndex:10] : nil,
+            (arguments.count > 11) ? [arguments objectAtIndex:11] : nil,
+            (arguments.count > 12) ? [arguments objectAtIndex:12] : nil,
+            (arguments.count > 13) ? [arguments objectAtIndex:13] : nil,
+            (arguments.count > 14) ? [arguments objectAtIndex:14] : nil,
+            (arguments.count > 15) ? [arguments objectAtIndex:15] : nil,
+            (arguments.count > 16) ? [arguments objectAtIndex:16] : nil,
+            (arguments.count > 17) ? [arguments objectAtIndex:17] : nil,
+            (arguments.count > 18) ? [arguments objectAtIndex:18] : nil,
+            (arguments.count > 19) ? [arguments objectAtIndex:19] : nil
+    ];
 }
 
 #pragma clang diagnostic push
