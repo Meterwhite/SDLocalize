@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SDLocalize"
-  s.version      = "1.2"
+  s.version      = "1.3"
   s.summary      = 'Efficient iOS localization solution.(Objc, swift, NSLocalizedString, xib)'
   s.homepage     = 'https://github.com/Meterwhite/SDLocalize'
   s.license      = 'MIT'

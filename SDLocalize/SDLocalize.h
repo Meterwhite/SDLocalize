@@ -119,7 +119,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Xcode suportted
 
-@interface SDLView (SDLocalize)
+#if TARGET_OS_IPHONE || TARGET_OS_TV
+
+@interface UIView (SDLocalize)
 
 @property (nullable, nonatomic, copy) IBInspectable NSString *sdl_register;
 
@@ -128,6 +130,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (getter = sdl_isDynamicFormat) IBInspectable BOOL sdl_dynamicFormat;
 
 @end
+
+#elif TARGET_OS_MAC
+
+@interface NSView (SDLocalize)
+
+@property (nullable, nonatomic, copy) IBInspectable NSString *sdl_register;
+
+@property (nullable, nonatomic, copy) void(^sdl_localizedDone)(id _Nonnull view);
+
+@property (getter = sdl_isDynamicFormat) IBInspectable BOOL sdl_dynamicFormat;
+
+@end
+
+#endif
+
 
 #pragma mark - NSString (SDLocalize)
 
